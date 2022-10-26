@@ -1,6 +1,6 @@
 pipeline 
 {
-    agent slavehoul
+    agent {slavehoul}
     stages 
     {
         stage('Firts stage') 
