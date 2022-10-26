@@ -1,0 +1,25 @@
+pipeline 
+{
+    agent slavehoul
+    stages 
+    {
+        stage('Firts stage') 
+        {
+            steps 
+            {
+                echo 'This is the first stage'
+                sh "ls -la"
+            }
+        }
+        stage('Second stage')
+        {
+            steps
+            {
+                echo 'This is the second stage'
+                echo 'Start stage....'
+                sh "cat index.html"
+                echo 'End stage...'
+            }
+        }
+    }
+}
