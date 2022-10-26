@@ -8,7 +8,11 @@ pipeline
             steps 
             {
                 echo 'This is the first stage'
-                sh "ls -la"
+                sh '''
+                    pwd
+                    whoami
+                    ls -la
+                '''
             }
         }
         stage('Second stage')
