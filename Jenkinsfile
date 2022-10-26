@@ -1,6 +1,8 @@
 pipeline 
 {
-    agent {slavehoul}
+    agent { 
+	label 'slavehoul'
+	}
     stages 
     {
         stage('Firts stage') 
