@@ -1,21 +1,39 @@
-pipeline 
-{
-    agent any
-    stages 
-    {
-        stage('Build docker image')
+pipeline
         {
-            steps
-            {
-		echo "-----Start build docker image-----"
-		dir('content')
-		{
-			sh "docker build -t webviajenkins:v1 -f ../docker/Dockerfile ."
-			sh "docker images"
-		}
+            agent any
+            stages
+                    {
+                        stage('Docker login')
+                                {
+                                    steps
+                                            {
+                                                echo "-----Start docker login-----"
+                                                withCredentials([usernamePassword(credentialsId: 'dockerhub_laibach', usernameVariable: 'D_USERNAME', passwordVariable: 'D_PASS')]) {
+                                                    sh "docker login -u $D_USERNAME -p $D_PASS"
+                                                }
+                                            }
+                                }
+                        stage('Build docker image')
+                                {
+                                    steps
+                                            {
+                                                echo "-----Start build docker image-----"
+                                                dir('content')
+                                                        {
+                                                            sh "docker build -t stdlaibach/website_test:v1 -f ../docker/Dockerfile ."
+                                                            sh "docker images"
+                                                        }
 
-            }
+                                            }
 
+                                }
+                        stage('Docker push')
+                                {
+                                    steps
+                                            {
+                                                echo "-----Start docker push to dockerhub-----"
+                                                sh "docker push stdlaibach/website_test:v1"
+                                            }
+                                }
+                    }
         }
-    }
-}
