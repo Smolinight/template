@@ -3,27 +3,16 @@ pipeline
     agent any
     stages 
     {
-        stage('Firts stage') 
-        {
-            steps 
-            {
-                echo 'This is the first stage'
-                sh '''
-                    pwd
-                    whoami
-                    ls -la
-                '''
-            }
-        }
-        stage('Second stage')
+        stage('Build docker image')
         {
             steps
             {
-                echo 'This is the second stage'
-                echo 'Start stage....'
-                sh "cat index.html"
-                echo 'End stage...'
+		echo "-----Start build docker image-----"
+		sh "ls -la"
+		sh "tree"
+
             }
+
         }
     }
 }
