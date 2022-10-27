@@ -10,7 +10,7 @@ pipeline
 		echo "-----Start build docker image-----"
 		dir('content')
 		{
-			sh "docker build -t webviajenkins:v1 ."
+			sh "docker build -t webviajenkins:v1 -f ../docker/Dockerfile ."
 			sh "docker images"
 		}
 
