@@ -8,8 +8,11 @@ pipeline
             steps
             {
 		echo "-----Start build docker image-----"
-		sh "ls -la"
-		sh "tree"
+		dir('docker')
+		{
+			sh "docker build -t webviajenkins:v1 ."
+			sh "docker images"
+		}
 
             }
 
